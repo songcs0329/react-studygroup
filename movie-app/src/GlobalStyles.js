@@ -15,6 +15,10 @@ export const GlobalStyles = createGlobalStyle`
   body{
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 14px;
+    background-color: #EFEFEF;
+    color: #222;
+    letter-spacing: -1px;
+    line-height: 1.2;
   }
   a{text-decoration:none;color:inherit}
   abbr[title]{border-bottom:none;text-decoration:underline}
@@ -29,14 +33,54 @@ export const GlobalStyles = createGlobalStyle`
   legend{max-width:100%;white-space:normal;color:inherit}
   button, input, optgroup, select, textarea{
     -webkit-appearance:none;appearance:none;
-    margin:0;padding:0;background-color:transparent;border-radius:0;border:0;
+    margin:0;padding:0;background-color:transparent;border-radius:0;border:0;outline:0;
     font-family:inherit;font-size:inherit;letter-spacing:inherit;line-height:inherit
+  }
+  input {
+    ::placeholder {
+    color: #777;
+    font-size: 14px;
+  }
   }
   button, select{text-transform:none}
   select{background-color:transparent}
   button, a{cursor:pointer}
   textarea{overflow:auto}
   :focus{outline:none}
+  .select,
+  .ip {
+    display: inline-block;
+    font-size: 0;
+    input,
+    select {
+      width: 100%;
+      height: 100%;
+      padding: 8px;
+      font-size: 16px;
+      background-color: #fff;
+    }
+  }
+  .select {
+    width: 60px;
+    position: relative;
+    &:after {
+      content: '▼';
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 8px;
+    }
+    & + .ip {
+      width: calc(100% - 72px);
+      margin: 0 6px;
+    }
+  }
+  .ip {
+    input {
+      padding: 7px 8px;
+    }
+  }
 `
 const loadingSpin = keyframes`
   0%{-webkit-transform:rotate(0deg)}
