@@ -6,5 +6,5 @@ export const Loading = () => {
 };
 
 export const Error = message => {
-  return <ErrorMsg><strong>{message}</strong>를 확인해주세요.</ErrorMsg>
+  return <ErrorMsg>{message}</ErrorMsg>
 }

@@ -2,29 +2,20 @@ import React, { useContext, createContext, useReducer } from 'react';
 
 export const LOADING = "LOADING"
 export const GET_MOVIES = "GET_MOVIES"
-export const CHANGE_DATE = "CHANGE_DATE"
 export const ERROR = "ERROR"
 
 const initialState = {
   loading: false,
-  date: "",
   movies: [],
   error: null
 }
 
 function reducer(state, action) {
-  console.log(state, action)
   switch(action.type) {
     case LOADING:
       return {
         ...state,
         loading: true
-      }
-    case CHANGE_DATE:
-      return {
-        ...state,
-        loading: false,
-        [action.name] : action.value
       }
     case GET_MOVIES:
       return {
@@ -67,13 +58,14 @@ export const useMoviesDispatch = () => {
   return dispatch
 }
 
-export const AsyncData = async (dispatch, callback) => {
+export const AsyncData = async (dispatch, callback, base, opts) => {
   dispatch({type: LOADING})
   try {
-    const res = await callback()
+    const res = await callback(base)
+    const resultList = `${opts}BoxOfficeList`
     dispatch({
       type: GET_MOVIES,
-      movies: res.boxOfficeResult.dailyBoxOfficeList
+      movies: res.boxOfficeResult[resultList]
     })
   } catch(e) {
     dispatch({
