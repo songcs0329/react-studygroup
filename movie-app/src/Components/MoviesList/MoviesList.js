@@ -9,7 +9,13 @@ const MoviesList = ({loading, movies, error}) => {
   
   return (
     <MoviesListStyles>
-      {movies.map(movie => <MovieItem key={movie.rnum} item={movie} />)}
+      {
+        movies.length < 1
+        ?
+        <li>검색결과가 없습니다.</li>
+        :
+        movies.map(movie => <MovieItem key={movie.rnum} item={movie} />)
+      }
     </MoviesListStyles>
   );
 };
