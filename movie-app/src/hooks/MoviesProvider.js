@@ -75,6 +75,7 @@ export const changeValue = (dispatch, name, value) => {
 }
 
 export const AsyncData = async (dispatch, date, options, callback) => {
+  if(!date) return
   dispatch({type: LOADING})
   try {
     const res = await callback(date)
