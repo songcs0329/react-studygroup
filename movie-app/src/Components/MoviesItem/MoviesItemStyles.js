@@ -51,7 +51,7 @@ export const MoviesItemStyles = styled.li`
         position: absolute;
         left: 0;
         bottom: 0;
-        background-color: rgb(29,76,216,0.4);
+        background-color: rgb(0,155,119,0.4);
         z-index: -1;
       }
     }

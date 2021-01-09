@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { getMoviesDay, getMoviesWeek } from '../apis/movies';
-import { useMoviesState, useMoviesDispatch, AsyncData } from '../hooks/MoviesProvider';
+import React, { useEffect } from 'react';
+import { getLatest, getMoviesDay, getMoviesWeek } from '../apis/movies';
+import { useMoviesState, useMoviesDispatch, AsyncData, changeValue } from '../hooks/MoviesProvider';
 import MoviesList from '../Components/MoviesList/MoviesList';
 import MoviesSearch from '../Components/MoviesSearch/MoviesSearch';
 
@@ -8,33 +8,23 @@ import MoviesSearch from '../Components/MoviesSearch/MoviesSearch';
 const MoviesWrap = () => {
   const state = useMoviesState()
   const dispatch = useMoviesDispatch()
-  const [search, setSearch] = useState({
-    options: 'daily',
-    date: ""
-  })
-  
-  const {loading, movies, error} = state
-  const {options, date} = search
+  const {loading, movies, error, options, date} = state
 
+  const local = localStorage.setItem("movies", JSON.stringify(movies))
   useEffect(() => {
-    if(movies.length < 1) {
-      if(options === "daily") AsyncData(dispatch, getMoviesDay, date, options)
-      if(options === "weekly") AsyncData(dispatch, getMoviesWeek, date, options)  
-    }
-    
-  }, [dispatch, movies, date, options])
+    // 첫 로드 시에만 실행
+    if(!local) AsyncData(dispatch, getLatest(), "daily", getMoviesDay)
+  }, [dispatch, local])
 
   const handleChange = e => {
-    setSearch({
-      ...search,
-      [e.target.name] : e.target.value
-    })
+    const {name, value} = e.target
+    changeValue(dispatch, name, value)
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-    if(options === "daily") AsyncData(dispatch, getMoviesDay, date, options)
-    if(options === "weekly") AsyncData(dispatch, getMoviesWeek, date, options)
+    if(options === "daily") AsyncData(dispatch, date, options, getMoviesDay)
+    if(options === "weekly") AsyncData(dispatch, date, options, getMoviesWeek)
   }
 
   return (
