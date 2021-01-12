@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { getLatest, getMoviesDay, getMoviesWeek } from '../apis/movies';
+import { getMoviesDay, getMoviesWeek } from '../apis/movies';
 import { useMoviesState, useMoviesDispatch, AsyncData, changeValue } from '../hooks/MoviesProvider';
 import MoviesList from '../Components/MoviesList/MoviesList';
 import MoviesSearch from '../Components/MoviesSearch/MoviesSearch';
@@ -10,11 +10,10 @@ const MoviesWrap = () => {
   const dispatch = useMoviesDispatch()
   const {loading, movies, error, options, date} = state
 
-  const local = localStorage.setItem("movies", JSON.stringify(movies))
   useEffect(() => {
-    // 첫 로드 시에만 실행
-    if(!local) AsyncData(dispatch, getLatest(), "daily", getMoviesDay)
-  }, [dispatch, local])
+    AsyncData(dispatch, date, options, getMoviesDay)
+    // eslint-disable-next-line
+  }, [dispatch])
 
   const handleChange = e => {
     const {name, value} = e.target

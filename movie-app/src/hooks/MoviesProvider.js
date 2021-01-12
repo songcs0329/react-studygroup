@@ -1,4 +1,5 @@
 import React, { useContext, createContext, useReducer } from 'react';
+import { getLatest } from '../apis/movies';
 
 const LOADING = "LOADING"
 const GET_MOVIES = "GET_MOVIES"
@@ -10,7 +11,7 @@ const initialState = {
   movies: [],
   error: null,
   options: "daily",
-  date: ""
+  date: getLatest()
 }
 
 function reducer(state, action) {
@@ -75,7 +76,8 @@ export const changeValue = (dispatch, name, value) => {
 }
 
 export const AsyncData = async (dispatch, date, options, callback) => {
-  if(!date) return
+  if(date.length < 8 || isNaN(Number(date))) return alert(`날짜를 확인해주세요 ex)${getLatest()}`)
+  
   dispatch({type: LOADING})
   try {
     const res = await callback(date)

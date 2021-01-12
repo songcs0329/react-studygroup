@@ -16,7 +16,6 @@ export const getMoviesDay = async date => {
   
   try {
     const response = await axios.get(`http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${API_KEY}&targetDt=${targetDate}`)
-    console.log(`daily`)
     console.log(response)
     return response.data
   } catch(e) {
@@ -30,7 +29,6 @@ export const getMoviesWeek = async date => {
   
   try {
     const response = await axios.get(`http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=${API_KEY}&targetDt=${targetDate}&weekGb=0`)
-    console.log(`weekly`)
     console.log(response)
     return response.data
   } catch(e) {
