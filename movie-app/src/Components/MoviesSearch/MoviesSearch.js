@@ -1,6 +1,6 @@
 import React from 'react';
+import { getLatest } from '../../utils/utils';
 import { MoviesSearchStyles } from './MoviesSearchStyles';
-import { getLatest } from '../../apis/movies'
 
 const MoviesSearch = ({options, date, onChange, onSubmit}) => {
 

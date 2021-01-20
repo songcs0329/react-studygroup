@@ -1,15 +1,20 @@
 import styled from 'styled-components'
 
 export const MoviesItemStyles = styled.li`
-  display: flex;
-  position: relative;
   margin-top: 16px;
-  padding: 16px;
   border-radius: 8px;
-  align-items: center;
-  justify-content: space-between;
   background-color: #fff;
   box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+  > a,
+  > button {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 16px;
+    align-items: center;
+    justify-content: space-between;
+  }
   &:first-child {
     margin-top: 0;
   }
@@ -80,6 +85,8 @@ export const MoviesItemStyles = styled.li`
         margin-top: 10px;
       }
       .per {
+        display: inline-block;
+        min-width: 40px;
         margin-left: 6px;
         font-weight: bold;
         &:after {

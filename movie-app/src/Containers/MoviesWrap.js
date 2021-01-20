@@ -3,7 +3,12 @@ import { getMoviesDay, getMoviesWeek } from '../apis/movies';
 import { useMoviesState, useMoviesDispatch, AsyncData, changeValue } from '../hooks/MoviesProvider';
 import MoviesList from '../Components/MoviesList/MoviesList';
 import MoviesSearch from '../Components/MoviesSearch/MoviesSearch';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import MovieDetailWrap from './MovieDetailWrap';
 
 const MoviesWrap = () => {
   const state = useMoviesState()
@@ -27,19 +32,26 @@ const MoviesWrap = () => {
   }
 
   return (
-    <>
-      <MoviesSearch
-        options={options}
-        date={date}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
-      <MoviesList
-        loading={loading}
-        movies={movies}
-        error={error}
-      />
-    </>
+    <Router>
+      <Switch>
+        <Route path={`/`} exact={true}>
+          <MoviesSearch
+            options={options}
+            date={date}
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+          />
+          <MoviesList
+            loading={loading}
+            movies={movies}
+            error={error}
+          />
+        </Route>
+        <Route path={`/detail/:movieCd`}> 
+          <MovieDetailWrap/>
+        </Route>
+      </Switch>
+    </Router>
   );
 };
 
