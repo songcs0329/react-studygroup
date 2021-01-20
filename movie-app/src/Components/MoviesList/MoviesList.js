@@ -1,7 +1,7 @@
 import React from 'react';
 import { Loading, Error } from '../Default';
 import { MoviesListStyles } from './MoviesListStyles';
-import MovieItem from '../MoviesItem/MoviesItem'
+import MovieItem from '../MoviesItem/MoviesItem';
 
 const MoviesList = ({loading, movies, error}) => {
   if(loading) return <Loading />
@@ -14,10 +14,10 @@ const MoviesList = ({loading, movies, error}) => {
         ?
         <li>검색결과가 없습니다.</li>
         :
-        movies.map(movie => <MovieItem key={movie.rnum} item={movie} />)
+        movies.map(movie => <MovieItem key={movie.rnum} item={movie}/>)
       }
     </MoviesListStyles>
   );
-};
+}
 
 export default MoviesList;

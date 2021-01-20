@@ -81,6 +81,16 @@ export const GlobalStyles = createGlobalStyle`
       padding: 7px 8px;
     }
   }
+  .hide {
+    overflow: hidden;
+    display: block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    clip: clip(-1px, -1px, -1px, -1px);
+    position: absolute;
+    left: -9999px;
+  }
 `
 const loadingSpin = keyframes`
   0%{-webkit-transform:rotate(0deg)}

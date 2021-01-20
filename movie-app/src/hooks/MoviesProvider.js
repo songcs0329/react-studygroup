@@ -1,5 +1,5 @@
 import React, { useContext, createContext, useReducer } from 'react';
-import { getLatest } from '../apis/movies';
+import { getLatest } from '../utils/utils';
 
 const LOADING = "LOADING"
 const GET_MOVIES = "GET_MOVIES"
@@ -76,7 +76,7 @@ export const changeValue = (dispatch, name, value) => {
 }
 
 export const AsyncData = async (dispatch, date, options, callback) => {
-  if(date.length < 8 || isNaN(Number(date))) return alert(`날짜를 확인해주세요 ex)${getLatest()}`)
+  if(date.length < 8 || isNaN(Number(date))) return alert(`날짜를 확인해주세요`)
   
   dispatch({type: LOADING})
   try {
