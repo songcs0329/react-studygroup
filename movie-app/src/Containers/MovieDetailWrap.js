@@ -12,7 +12,12 @@ const MovieDetailWrap = () => {
   const handleBack = () => history.goBack()
 
   useEffect(() => {
-    getMovieDetail(movieCd).then(data => setDetail(data.movieInfoResult.movieInfo))
+    const fetchDetail = async () => {
+      const fetch = await getMovieDetail(movieCd)
+      setDetail(fetch.movieInfoResult.movieInfo)
+    }
+    
+    fetchDetail()
   }, [movieCd])
   
   if(!detail) return <Loading/>
