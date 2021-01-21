@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getMoviesDay, getMoviesWeek } from '../apis/movies';
 import { useMoviesState, useMoviesDispatch, AsyncData, changeValue } from '../hooks/MoviesProvider';
 import MoviesList from '../Components/MoviesList/MoviesList';
@@ -11,14 +11,18 @@ import {
 import MovieDetailWrap from './MovieDetailWrap';
 
 const MoviesWrap = () => {
+  const [mounted, setMounted] = useState(false)
   const state = useMoviesState()
   const dispatch = useMoviesDispatch()
   const {loading, movies, error, options, date} = state
 
   useEffect(() => {
-    AsyncData(dispatch, date, options, getMoviesDay)
-    // eslint-disable-next-line
-  }, [dispatch])
+    const fetchMoives = async () => {
+      setMounted(!mounted)
+      return await AsyncData(dispatch, date, options, getMoviesDay)
+    }
+    if(!mounted) fetchMoives()
+  },[dispatch, date, options, mounted])
 
   const handleChange = e => {
     const {name, value} = e.target
