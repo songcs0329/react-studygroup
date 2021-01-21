@@ -20,4 +20,4 @@ const MoviesList = ({loading, movies, error}) => {
   );
 }
 
-export default MoviesList;
+export default React.memo(MoviesList);
